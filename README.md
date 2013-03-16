@@ -1,7 +1,7 @@
 Fever RSS Reader tweaked for Heroku/AWS.
 ========================================
 
-###If you want to run yourself, you'll need to buy a license from Shaun Inman (http://www.feedafever.com/).
+##If you want to run yourself, you'll need to buy a license from Shaun Inman (http://www.feedafever.com/).
 
 This was actually sort of a bitch to set up, so for others looking to jump from Google Reader, here's how I got it working. Documenting for others as well as for myself if I ever need to move/redeploy.
 
