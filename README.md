@@ -95,7 +95,7 @@ Then authorize your IP address: `rds-authorize-db-security-group-ingress default
 	  `--ec2-security-group-name default \`
 	  `--ec2-security-group-owner-id 098166147350`
 
-	`heroku addons:add amazon_rds --url=mysql2://{db user, from last step}:{db pw, from last step}@{rdshostname}.amazonaws.com/3306:{databasename, from last step}`
+	`heroku addons:add amazon_rds --url=mysql2://{user}:{pw}@{rdshostname}.amazonaws.com/3306:{database name}`
 
 13. After all that, revisit your Heroku app and add the credentials you just added here to the boot.php form. You'll need:
 	- Server: the database URL (just the URL, nothing before the @ in the last step, i.e. no user / pw or mysql2://).
