@@ -3,7 +3,7 @@ Fever RSS Reader tweaked for Heroku/AWS.
 
 #### There's an easier/cheaper way to do this with a custom [PHP buildpack](https://github.com/iphoting/heroku-buildpack-php-tyler).
 Follow this very concise [gist](https://gist.github.com/plasticine/5175588) for instructions.
-Leaving this up in case ClearDB ends up being a bait-and-switch on their free MySQL plan. If so, revert to [this commit](0af102a096ac32af363310df12c530dface695a2) and follow instructions below.
+Leaving this up in case ClearDB ends up being a bait-and-switch on their cheaper MySQL plan. If so, revert to [this commit](0af102a096ac32af363310df12c530dface695a2) and follow instructions below.
 
 ##### These are my tweaks to make Fever work on Heroku. Shaun Inman (http://www.feedafever.com/) owns the copyright to the source.
 
