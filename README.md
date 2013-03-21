@@ -13,7 +13,7 @@ Leaving this up in case ClearDB ends up being a bait-and-switch on their cheaper
 
 This was actually sort of a bitch to set up, so for others looking to jump from Google Reader, here's how I got it working. Documenting for others as well as for myself if I ever need to move/redeploy.
 
-1. Step one is, really decide if you wanna buy this. This is like thirteen steps for a freakin' RSS reader.
+1. Step one is, really decide if you wanna do this. This is like fourteen steps and $30 for a freakin' RSS reader.
 
 2. Initialize a Heroku app (http://heroku.com).
 
@@ -89,9 +89,9 @@ This was actually sort of a bitch to set up, so for others looking to jump from 
 	`  --db-name {name} \`
 	`  --headers`
 
-Wait a few minutes for this to create your database (you can check by running `rds-describe-db-instances</code> again`.
+	Wait a few minutes for this to create your database (you can check by running `rds-describe-db-instances</code> again`.
 
-Then authorize your IP address: `rds-authorize-db-security-group-ingress default --cidr-ip {your IP address}`.
+	Then authorize your IP address: `rds-authorize-db-security-group-ingress default --cidr-ip {your IP address}`.
 
 12. Finally, we're ready to get Heroku running on this database. Install the Heroku RDS addon and give it the credentials it will need.
 	
