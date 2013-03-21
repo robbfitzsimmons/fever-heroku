@@ -2,7 +2,11 @@ Fever RSS Reader tweaked for Heroku/AWS.
 ========================================
 
 #### There's an easier/cheaper way to do this with a custom [PHP buildpack](https://github.com/iphoting/heroku-buildpack-php-tyler).
+
 Follow this very concise [gist](https://gist.github.com/plasticine/5175588) for instructions.
+
+Note: it's important to do the "optional" curl request at the bottom on a cron job every 10min, otherwise the Heroku app will reset itself and you'll find yourself constantly having to re-enter your database credentials (and it won't work on 3rd party clients).
+
 Leaving this up in case ClearDB ends up being a bait-and-switch on their cheaper MySQL plan. If so, revert to [this commit](0af102a096ac32af363310df12c530dface695a2) and follow instructions below.
 
 ##### These are my tweaks to make Fever work on Heroku. Shaun Inman (http://www.feedafever.com/) owns the copyright to the source.
@@ -97,17 +101,27 @@ Then authorize your IP address: `rds-authorize-db-security-group-ingress default
 
 	`heroku addons:add amazon_rds --url=mysql2://{user}:{pw}@{rdshostname}.amazonaws.com/3306:{database name}`
 
-13. After all that, revisit your Heroku app and add the credentials you just added here to the boot.php form. You'll need:
+14. After all that, revisit your Heroku app and add the credentials you just added here to the boot.php form. You'll need:
 	- Server: the database URL (just the URL, nothing before the @ in the last step, i.e. no user / pw or mysql2://).
 	- DB name: from your rds-create-db-instance {name}
 	- Username: same as above, {user}
 	- Password: same as above, {pw}
 
-And, after all that, you can get your reader back.
+15. Heroku (or Fever, not really sure) will lock you out after ~1hr if you aren't refreshing the feeds in the background, and you'll find yourself having to dig out and re-enter your DB credentials into Fever. This is a huge pain especially if you're using an iOS client and don't have access to your console to grab them.
+
+Luckily preventing this is pretty simple. Just keep refreshing the feeds on a cron job via Heroku Scheduler.
+	`heroku addons:add scheduler:standard`
+	`heroku addons:open scheduler`
+
+Add a job with the following curl request, set to run every 10min:
+	`curl -L -s http://YOUR_HEROKU_APP/fever/?refresh`
+
+Close it, and you're done.
 
 C'mon now, Google. That was mean.
 
 Blogs that were helpful:  
+- https://gist.github.com/plasticine/5175588
 - http://tjstein.com/2011/09/running-wordpress-on-heroku-and-amazon-rds/  
 - https://devcenter.heroku.com/articles/amazon_rds/  
 - http://hakre.wordpress.com/2012/05/20/php-on-heroku-again/  
