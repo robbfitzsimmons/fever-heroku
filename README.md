@@ -107,14 +107,9 @@ This was actually sort of a bitch to set up, so for others looking to jump from 
 	- Username: same as above, {user}
 	- Password: same as above, {pw}
 
-15. Heroku (or Fever, not really sure) will lock you out after ~1hr if you aren't refreshing the feeds in the background, and you'll find yourself having to dig out and re-enter your DB credentials into Fever. This is a huge pain especially if you're using an iOS client and don't have access to your console to grab them.
+15. Heroku will shut down its dyno, causing Fever to lock you out, after ~1hr if you aren't constantly hitting the page. You'll find yourself having to dig out and re-enter your DB credentials into Fever. This is a huge pain especially if you're using an iOS client and don't have access to your console to grab them.
 
-Luckily preventing this is pretty simple. Just keep refreshing the feeds on a cron job via Heroku Scheduler.
-	`heroku addons:add scheduler:standard`
-	`heroku addons:open scheduler`
-
-Add a job with the following curl request, set to run every 10min:
-	`curl -L -s http://YOUR_HEROKU_APP/fever/?refresh`
+Luckily preventing this is pretty simple. Just "monitor your uptime" (nudge nudge wink wink) with a service like [Pingdom](https://www.pingdom.com/) and hit the site every second, to prevent any downtime.
 
 Close it, and you're done.
 
